@@ -11,11 +11,6 @@ const isbnInput = document.querySelector("#ISBN");
 const button = document.querySelector(".btn");
 const bookListElement = document.querySelector("#book-list");
 
-console.log("titleInput:", titleInput);
-console.log("authorInput:", authorInput);
-console.log("isbnInput:", isbnInput);
-console.log("button:", button);
-
 // BookList constructor
 function BookList() {
     this.books = [];
@@ -53,13 +48,10 @@ function BookList() {
 const bookList = new BookList();
 
 button.addEventListener("click", function() {
-    console.log("Button clicked");
     if (titleInput.value == "" && authorInput.value == "" && isbnInput.value == "") {
         alert("Enter any book");
     } else {
         const newBook = new Book(titleInput.value, authorInput.value, isbnInput.value);
-        console.log("New Book:", newBook);
         bookList.addBook(newBook);
     }
 });
-
