@@ -81,16 +81,3 @@ button.addEventListener("click", function() {
         bookList.addBook(newBook);
     }
 });
-
-
-// Instances of Book and BookList
-const bookList = new BookList();
-
-button.addEventListener("click", function() {
-    if (titleInput.value == "" && authorInput.value == "" && isbnInput.value == "") {
-        alert("Enter any book");
-    } else {
-        const newBook = new Book(titleInput.value, authorInput.value, isbnInput.value);
-        bookList.addBook(newBook);
-    }
-});
