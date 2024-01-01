@@ -40,22 +40,34 @@ function BookList() {
     this.displayBooks = function() {
         const bookList = document.querySelector("#book-list");
         bookList.innerHTML = "";
-
+    
         this.books.forEach(function(book) {
             const bookListRow = document.createElement("tr");
-
-            const newTitle = document.createElement("th");
+    
+            // Display read status as a colored dot
+            const readStatusCell = document.createElement("td");
+            const readStatusDot = document.createElement("div");
+            readStatusDot.className = "read-status-dot";
+            readStatusDot.style.backgroundColor = book.read ? "green" : "red";
+            readStatusCell.appendChild(readStatusDot);
+            bookListRow.appendChild(readStatusCell);
+    
+            const newTitle = document.createElement("td");
             newTitle.innerHTML = book.title;
             bookListRow.appendChild(newTitle);
-
-            const newAuthor = document.createElement("th");
+    
+            const newAuthor = document.createElement("td");
             newAuthor.innerHTML = book.author;
             bookListRow.appendChild(newAuthor);
-
-            const newISBN = document.createElement("th");
+    
+            const newReadStatus = document.createElement("td");
+            newReadStatus.innerHTML = book.read ? "Read" : "Not Read";
+            bookListRow.appendChild(newReadStatus);
+    
+            const newISBN = document.createElement("td");
             newISBN.innerHTML = book.isbn;
             bookListRow.appendChild(newISBN);
-
+    
             bookList.appendChild(bookListRow);
         });
     };
