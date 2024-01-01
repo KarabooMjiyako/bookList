@@ -1,0 +1,17 @@
+body{
+    font-family: 'Playfair Display', serif;
+    
+}
+
+.headerText{
+    text-align: center;
+}
+
+.btn{
+    display: block;
+}
+
+.text{
+    text-align: center;
+    color: blue;
+}
