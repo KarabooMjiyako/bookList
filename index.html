@@ -13,33 +13,68 @@
 </head>
 <body>
     <div class="container mt-4">
-    <h1 class="headerText display-4"><span class="text">Book</span>List</h1>
-       <div class="mb-3">
-        <label for="title" class="form-label" >Title</label>
-        <input type="text" class="form-control" id="title"/>
-      </div>
-      <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
-        <input type="text" class="form-control" id="author"/>
-      </div>
-      <div class="mb-3">
-        <label for="ISBN" class="form-label">ISBN</label>
-        <input type="number" class="form-control" id="ISBN"/>
-      </div>
-      <input type="submit" value="Add Book" class="btn btn-primary btn-block"/>
-      <br/>
+        <div class="Header">
+            <img src="https://i.ibb.co/PjgQRfM/image.png" alt="image" class="img-fluid h-25">
+            <h1 class="headerText display-4"><span class="text">Book</span>List</h1>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" />
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" />
+        </div>
+        <div class="mb-3">
+            <label for="ISBN" class="form-label">ISBN</label>
+            <input type="number" class="form-control" id="ISBN" />
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="readStatus">
+            <label class="form-check-label" for="readStatus">Read</label>
+        </div>
+        <button class="btn ">Add Book</button>
+        <br />
+    
+        <div class="row">
+            <div class="status_bar">
+                <div class="order">
+                    <label for="order_by"
+                        >Order by:
+                        <select name="order_by" id="order_by">
+                            <option value="insertion_date" selected>Insertion date</option>
+                            <option value="publishing_date">Publishing date</option>
+                        </select>
+                        <select name="order" id="order">
+                            <option value="ascending">Asc</option>
+                            <option value="descending" selected>Desc</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="map">
+                    <div class="read_color" id="readStatusIndicator"></div>
+                    <h4>Read</h4>
+                    <div class="Not_read_color"></div>
+                    <h4>Not read</h4>
+                </div>
+            </div>
+        </div>
 
-      <table class="table table-striped mt-5">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-            </tr>
-        </thead>
-        <tbody id="book-list"></tbody>
-      </table>
+        <table class="table table-striped mt-5">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                </tr>
+            </thead>
+            <tbody id="book-list"></tbody>
+        </table>
     </div>
+
     <script src="index.js"></script>
+    <footer>
+        This project was coded by <a href="https://github.com/KarabooMjiyako">Karabo Mjiyako</a>
+    </footer>
 </body>
 </html>
