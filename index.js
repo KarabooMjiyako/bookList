@@ -3,7 +3,7 @@
 function Book(title, author, isbn, read, action){
     this.title = title;
     this.author = author;
-    this.read = read;
+    this.read = readStatus;
     this.isbn = isbn;
     this.action = action || "Delete";
 };
