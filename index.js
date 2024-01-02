@@ -3,7 +3,7 @@
 function Book(title, author, isbn, read, action){
     this.title = title;
     this.author = author;
-    this.read = read || false;
+    this.read = read;
     this.isbn = isbn;
     this.action = action || "Delete";
 };
@@ -36,19 +36,20 @@ function BookList(){
              newAuthor.innerHTML = book.author;
              bookListRow.appendChild(newAuthor);
 
-             const newRead = document.createElement("td");
-             newRead.innerHTML = book.read ? "Read" : "Not Read";
-             bookListRow.appendChild(newRead);
+             const newReadStatus = document.createElement("td");
+             newReadStatus.innerHTML = book.read ? "Read" : "Not Read";
+             bookListRow.appendChild(newReadStatus);
+
 
              const newISBN = document.createElement("td");
              newISBN.innerHTML = book.isbn;
              bookListRow.appendChild(newISBN);
 
              const deleteCell = document.createElement("td");
-            const deleteButton = document.createElement("button");
-            deleteButton.className = "btn btn-danger";
-            deleteButton.innerHTML = book.action;
-            deleteButton.addEventListener("click", function() {
+             const deleteButton = document.createElement("button");
+             deleteButton.className = "btn btn-danger";
+             deleteButton.innerHTML = book.action;
+             deleteButton.addEventListener("click", function() {
                 alert("Deleting book: " + book.title);
             });
             deleteCell.appendChild(deleteButton);
@@ -65,7 +66,7 @@ function BookList(){
     };
 
     this.addPlaceholderBook = function() {
-        const placeholderBook = new Book("Nervous Conditions", "Tsitsi Dangarembga", "9780954702335", true);
+        const placeholderBook = new Book("Nervous Conditions", "Tsitsi Dangarembga", "9780954702335", true, "Read");
         this.addBook(placeholderBook);
     };
 
@@ -80,6 +81,8 @@ function BookList(){
 }
 
 const bookList = new BookList();
+
+bookList.addPlaceholderBook();
 
 bookList.loadBooks();
 
