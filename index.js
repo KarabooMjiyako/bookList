@@ -52,20 +52,23 @@ function BookList(){
              newISBN.innerHTML = book.isbn;
              bookListRow.appendChild(newISBN);
 
+
+
              const deleteCell = document.createElement("td");
              const deleteButton = document.createElement("button");
              deleteButton.className = "btn btn-danger";
              deleteButton.innerHTML = book.action;
              deleteButton.addEventListener("click", function() {
-                alert("Deleting book: " + book.title);
-            });
-            deleteCell.appendChild(deleteButton);
-            bookListRow.appendChild(deleteCell);
+             const index = bookList.books.indexOf(book);
+                   bookList.deleteBook(index);
+              deleteCell.parentNode.removeChild(deleteCell); // Remove deleteCell from its parent
+              });
+             deleteCell.appendChild(deleteButton);
+             bookListRow.appendChild(deleteCell);
 
             bookList.appendChild(bookListRow);
         });
-    };
-
+    }
     this.addBook = function(book){
         this.books.push(book);
         this.displayBooks()
@@ -82,10 +85,10 @@ function BookList(){
             this.books = storedBooks;
             this.displayBooks();
         }
-    };
-
+    }
 
 }
+
 
 const bookList = new BookList();
 
