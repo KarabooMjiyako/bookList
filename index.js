@@ -1,23 +1,74 @@
-// Book constructor
-function Book(title, author, isbn, read) {
+//book constructor
+
+function Book(title, author, isbn, read, action){
     this.title = title;
     this.author = author;
+    this.read = read || false;
     this.isbn = isbn;
-    this.read = read || false; // Default value for read status
-}
+    this.action = action || "Delete";
+};
 
-const titleInput = document.querySelector("#title");
-const authorInput = document.querySelector("#author");
-const isbnInput = document.querySelector("#ISBN");
-const readStatusInput = document.querySelector("#readStatus");
-const button = document.querySelector(".btn");
-const bookListElement = document.querySelector("#book-list");
+//Booklist constructor
 
-// BookList constructor
-function BookList() {
+function BookList(){
     this.books = [];
+    
+    this.displayBooks = function(){
+        const bookList = document.querySelector("#book-list");
+        bookList.innerHTML = "";
 
-    // Load books from local storage on initialization
+        this.books.forEach(function(book){
+            const bookListRow = document.createElement("tr");
+
+             // Display read status as a colored dot
+             const readStatusCell = document.createElement("td");
+             const readStatusDot = document.createElement("div");
+             readStatusDot.className = "read-status-dot";
+             readStatusDot.style.backgroundColor = book.read ? "green" : "red";
+             readStatusCell.appendChild(readStatusDot);
+             bookListRow.appendChild(readStatusCell);
+
+             const newTitle = document.createElement("td");
+             newTitle.innerHTML = book.title;
+             bookListRow.appendChild(newTitle);
+
+             const newAuthor = document.createElement("td");
+             newAuthor.innerHTML = book.author;
+             bookListRow.appendChild(newAuthor);
+
+             const newRead = document.createElement("td");
+             newRead.innerHTML = book.read ? "Read" : "Not Read";
+             bookListRow.appendChild(newRead);
+
+             const newISBN = document.createElement("td");
+             newISBN.innerHTML = book.isbn;
+             bookListRow.appendChild(newISBN);
+
+             const deleteCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "btn btn-danger";
+            deleteButton.innerHTML = book.action;
+            deleteButton.addEventListener("click", function() {
+                alert("Deleting book: " + book.title);
+            });
+            deleteCell.appendChild(deleteButton);
+            bookListRow.appendChild(deleteCell);
+
+            
+
+        });
+    };
+
+    this.addBook = function(book){
+        this.books.push(book);
+        this.displayBooks()
+    };
+
+    this.addPlaceholderBook = function() {
+        const placeholderBook = new Book("Nervous Conditions", "Tsitsi Dangarembga", "9780954702335", true);
+        this.addBook(placeholderBook);
+    };
+
     this.loadBooks = function() {
         const storedBooks = JSON.parse(localStorage.getItem("books"));
         if (storedBooks) {
@@ -26,64 +77,17 @@ function BookList() {
         }
     };
 
-    // Save books to local storage
-    this.saveBooks = function() {
-        localStorage.setItem("books", JSON.stringify(this.books));
-    };
-
-    this.addBook = function(book) {
-        this.books.push(book);
-        this.displayBooks();
-        this.saveBooks();
-    };
-
-    this.displayBooks = function() {
-        const bookList = document.querySelector("#book-list");
-        bookList.innerHTML = "";
-    
-        this.books.forEach(function(book) {
-            const bookListRow = document.createElement("tr");
-    
-            // Display read status as a colored dot
-            const readStatusCell = document.createElement("td");
-            const readStatusDot = document.createElement("div");
-            readStatusDot.className = "read-status-dot";
-            readStatusDot.style.backgroundColor = book.read ? "green" : "red";
-            readStatusCell.appendChild(readStatusDot);
-            bookListRow.appendChild(readStatusCell);
-    
-            const newTitle = document.createElement("td");
-            newTitle.innerHTML = book.title;
-            bookListRow.appendChild(newTitle);
-    
-            const newAuthor = document.createElement("td");
-            newAuthor.innerHTML = book.author;
-            bookListRow.appendChild(newAuthor);
-    
-            const newReadStatus = document.createElement("td");
-            newReadStatus.innerHTML = book.read ? "Read" : "Not Read";
-            bookListRow.appendChild(newReadStatus);
-    
-            const newISBN = document.createElement("td");
-            newISBN.innerHTML = book.isbn;
-            bookListRow.appendChild(newISBN);
-    
-            bookList.appendChild(bookListRow);
-        });
-    };
 }
 
-// Instances of Book and BookList
 const bookList = new BookList();
 
-// Load existing books from local storage
 bookList.loadBooks();
 
-// Add a placeholder book on page load
-document.addEventListener("DOMContentLoaded", function() {
-    const placeholderBook = new Book("Nervous Conditions", "Tsitsi Dangarembga", "9780954702335", true);
-    bookList.addBook(placeholderBook);
-});
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const isbnInput = document.querySelector("#ISBN");
+const readStatusInput = document.querySelector("#readStatus");
+const button = document.querySelector(".btn");
 
 button.addEventListener("click", function() {
     if (titleInput.value === "" || authorInput.value === "" || isbnInput.value === "") {
