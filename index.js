@@ -1,12 +1,19 @@
+
 //book constructor
 
-function Book(title, author, isbn, read, action){
+function Book(title, author, isbn, readStatus ){
     this.title = title;
     this.author = author;
     this.read = readStatus;
     this.isbn = isbn;
-    this.action = action || "Delete";
+    this.action = "Delete";
 };
+
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const isbnInput = document.querySelector("#ISBN");
+const readStatusInput = document.querySelector("#readStatus");
+const button = document.querySelector(".btn");
 
 //Booklist constructor
 
@@ -55,8 +62,7 @@ function BookList(){
             deleteCell.appendChild(deleteButton);
             bookListRow.appendChild(deleteCell);
 
-            
-
+            bookList.appendChild(bookListRow);
         });
     };
 
@@ -78,6 +84,7 @@ function BookList(){
         }
     };
 
+
 }
 
 const bookList = new BookList();
@@ -85,12 +92,6 @@ const bookList = new BookList();
 bookList.addPlaceholderBook();
 
 bookList.loadBooks();
-
-const titleInput = document.querySelector("#title");
-const authorInput = document.querySelector("#author");
-const isbnInput = document.querySelector("#ISBN");
-const readStatusInput = document.querySelector("#readStatus");
-const button = document.querySelector(".btn");
 
 button.addEventListener("click", function() {
     if (titleInput.value === "" || authorInput.value === "" || isbnInput.value === "") {
